@@ -29,7 +29,6 @@
     coreutils
     devbox
     direnv
-    fasd
     fzf
     goku
     jq
@@ -39,6 +38,7 @@
     sqlite
     tree
     yarn
+    zoxide
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -139,7 +139,7 @@
         fi
       }
 
-      eval "$(fasd --init auto)"
+      eval "$(zoxide init zsh)"
     '';
     shellAliases = {
       h = "history";
@@ -156,24 +156,6 @@
       gl = "git log";
       gds = "git diff --staged";
       gb = "git branch";
-
-      # fasd
-      # any
-      a = "fasd -a";
-      # show / search / select
-      s = "fasd -si";
-      # directory
-      d = "fasd -d";
-      # file
-      f = "fasd -f";
-      # interactive directory selection
-      sd = "fasd -sid";
-      # interactive file selection
-      sf = "fasd -sif";
-      # cd, same functionality as j in autojump
-      z = "fasd_cd -d";
-      # cd with interactive selection
-      zz = "fasd_cd -d -i";
 
       # colorful cat
       cat = "bat";
