@@ -32,11 +32,19 @@
     fzf
     goku
     jq
-    nodejs-18_x
+    (writeShellScriptBin "node" ''
+      #!${zsh}/bin/zsh
+      exec ${nodejs}/bin/node "$@"
+    '')
+    (writeShellScriptBin "node18" ''
+      #!${zsh}/bin/zsh
+      exec ${nodejs-18_x}/bin/node "$@"
+    '')
     postgresql
     python3
     sqlite
     tree
+    unison
     yarn
     zoxide
 
@@ -142,6 +150,7 @@
       eval "$(zoxide init zsh)"
     '';
     shellAliases = {
+      dr = "darwin-rebuild switch --flake ~/.config/nix/flake.nix";
       h = "history";
       o = "open .";
 
@@ -159,6 +168,9 @@
 
       # colorful cat
       cat = "bat";
+
+      # python
+      ea = ". env/bin/activate";
     };
   };
 
