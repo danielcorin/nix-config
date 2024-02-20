@@ -1,17 +1,21 @@
-Update configuration
+# nix-darwin/home-manager files
+
+These files live at `~/.config/nix` on my system.
+
+## Update configuration
 
 ```sh
 darwin-rebuild switch --flake .
 ```
 
-Install home-manager
+## Install home-manager
 
 ```sh
 nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
 nix-channel --update
 ```
 
-Resources that helped created this 🙏
+## Resources that helped created this 🙏
 
 - https://nixcademy.com/2024/01/15/nix-on-macos/
 - https://davi.sh/til/nix/nix-macos-setup/
