@@ -32,14 +32,8 @@
     fzf
     goku
     jq
-    (writeShellScriptBin "node" ''
-      #!${zsh}/bin/zsh
-      exec ${nodejs}/bin/node "$@"
-    '')
-    (writeShellScriptBin "node18" ''
-      #!${zsh}/bin/zsh
-      exec ${nodejs-18_x}/bin/node "$@"
-    '')
+    nixpkgs-fmt
+    nodejs-18_x
     postgresql
     python3
     sqlite
