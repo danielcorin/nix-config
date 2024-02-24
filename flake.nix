@@ -74,7 +74,7 @@
         menuExtraClock.IsAnalog = true;
         screencapture.location = "~/Desktop";
 
-        NSGlobalDomain.AppleShowAllExtensions = true;
+        NSGlobalDomain.AppleShowAllExtensions = false;
         NSGlobalDomain.AppleShowScrollBars = "Always";
         NSGlobalDomain.NSAutomaticQuoteSubstitutionEnabled = false;
 

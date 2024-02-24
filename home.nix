@@ -118,6 +118,7 @@
       github.user = "danielcorin";
       push.default = "tracking";
       init.defaultBranch = "main";
+      push.autoSetupRemote = true;
     };
   };
 
@@ -127,10 +128,6 @@
     initExtra = ''
       function mcd () {
         mkdir -p "$1" && cd "$1";
-      }
-
-      function push() {
-        git push origin $(git rev-parse --abbrev-ref HEAD)
       }
 
       function now() {
@@ -159,6 +156,9 @@
       gl = "git log";
       gds = "git diff --staged";
       gb = "git branch";
+      gp = "git pull";
+      ggm = "git checkout main";
+      push = "git push origin $(git rev-parse --abbrev-ref HEAD)";
 
       # colorful cat
       cat = "bat";
