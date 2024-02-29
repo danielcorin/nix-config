@@ -28,7 +28,9 @@
     chamber
     coreutils
     devbox
+    difftastic
     direnv
+    eza
     fzf
     goku
     jq
@@ -36,9 +38,14 @@
     nodejs-18_x
     postgresql
     python3
+    pipx
+    skhd
     sqlite
     tree
+    typst
     unison
+    watchexec
+    yabai
     yarn
     zoxide
 
@@ -46,7 +53,7 @@
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
     # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
+    (nerdfonts.override { fonts = [ "Hack" ]; })
 
     # # You can also create simple shell scripts directly inside your
     # # configuration. For example, this adds a command 'my-hello' to your
@@ -89,8 +96,14 @@
 
   programs.bat.enable = true;
 
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.eza = {
+    enable = true;
+  };
 
   programs.fzf = {
     enable = true;
@@ -120,6 +133,13 @@
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
     };
+    difftastic = {
+      enable = true;
+    };
+  };
+
+  programs.starship = {
+    enable = true;
   };
 
   programs.zsh = {
@@ -146,9 +166,10 @@
       o = "open .";
 
       # ls
-      ls = "ls --color=auto";
-      sl = "ls";
-      "l." = "ls -ltrah";
+      ls = "eza --color=auto";
+      sl = "eza --color=auto";
+      ll = "eza -l --color=auto";
+      "l." = "eza -la --color=auto";
 
       # git
       gs = "git status";
@@ -165,6 +186,10 @@
 
       # python
       ea = ". env/bin/activate";
+
+      # caffeinate
+      caf = "pgrep caffeinate > /dev/null && echo '☕' || echo '💤'";
+      tcaf = "pgrep caffeinate > /dev/null && kill $(pgrep caffeinate) || caffeinate -dim &";
     };
   };
 
