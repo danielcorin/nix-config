@@ -31,7 +31,9 @@
     difftastic
     direnv
     eza
+    fd
     fzf
+    glow
     goku
     jq
     nixpkgs-fmt
@@ -41,6 +43,7 @@
     pipx
     skhd
     sqlite
+    tmux
     tree
     typst
     unison
@@ -94,6 +97,105 @@
   #  /etc/profiles/per-user/danielcorin/etc/profile.d/hm-session-vars.sh
   #
 
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      live_config_reload = true;
+      colors = {
+        normal = {
+          black = "#333333";
+          red = "#C4265E";
+          green = "#86B42B";
+          yellow = "#B3B42B";
+          blue = "#6A7EC8";
+          magenta = "#8C6BC8";
+          cyan = "#56ADBC";
+          white = "#e3e3dd";
+        };
+        bright = {
+          black = "#666666";
+          red = "#f92672";
+          green = "#A6E22E";
+          yellow = "#e2e22e";
+          blue = "#819aff";
+          magenta = "#AE81FF";
+          cyan = "#66D9EF";
+          white = "#f8f8f2";
+        };
+        cursor = {
+          cursor = "0xd8d8d8";
+          text = "0x181818";
+        };
+      };
+
+      cursor = {
+        style = "Beam";
+        unfocused_hollow = false;
+        thickness = 0.2;
+      };
+
+      selection = {
+        save_to_clipboard = true;
+      };
+
+      shell = {
+        program = "${pkgs.zsh}/bin/zsh";
+        args = ["--login" "-c" "tmux new-session -A -s main-alacritty"];
+      };
+
+      font = {
+        normal = {
+          family = "Hack Nerd Font Mono";
+          style = "Regular";
+        };
+        italic = {
+          family = "Hack Nerd Font Mono";
+          style = "Italic";
+        };
+        bold_italic = {
+          family = "Hack Nerd Font Mono";
+          style = "Italic";
+        };
+        bold = {
+          family = "Hack Nerd Font Mono";
+          style = "Bold";
+        };
+        size = 14.0;
+      };
+      keyboard.bindings = [
+        # ⌘ + enter puts window in macOS full screen
+        { key = "Enter"; mods = "Command"; action = "ToggleFullscreen"; }
+        # opt + right and left jump between words
+        { key = "Right"; mods = "Alt"; chars = "\\u001BF"; }
+        { key = "Left"; mods = "Alt"; chars = "\\u001BB"; }
+        # ⌘ + d adds a pane to the right (splits window vertically)
+        { key = "D"; mods = "Command"; chars = "\\u0002%"; }
+        # ⌘ + ⇧ + d adds a pane below (splits window horizontally)
+        { key = "D"; mods = "Command|Shift"; chars = "\\u0002\""; }
+        # ⌘ + w prompts you to close the pane; "y" to confirm
+        { key = "W"; mods = "Command"; chars = "\\u0002x"; }
+        # ⌘ + arrows are for directional navigation around the panes
+        { key = "Down"; mods = "Command"; chars = "\\u0002\\u001b[B"; }
+        { key = "Up"; mods = "Command"; chars = "\\u0002\\u001b[A"; }
+        { key = "Left"; mods = "Command"; chars = "\\u0002\\u001b[D"; }
+        { key = "Right"; mods = "Command"; chars = "\\u0002\\u001b[C"; }
+        # ⌘ + ⇧ + enter maximizes the pane within the alacritty window
+        { key = "Enter"; mods = "Command|Shift"; chars = "\\u0002z"; }
+      ];
+
+      window = {
+        padding = {
+          x = 2;
+          y = 2;
+        };
+        decorations = "Full";
+        dynamic_padding = true;
+        dynamic_title = true;
+        startup_mode = "Maximized";
+      };
+    };
+  };
+
   programs.bat.enable = true;
 
   programs.direnv = {
@@ -103,6 +205,9 @@
 
   programs.eza = {
     enable = true;
+    extraOptions = [ "--group-directories-first" ];
+    icons = true;
+    git = true;
   };
 
   programs.fzf = {
@@ -142,9 +247,78 @@
     enable = true;
   };
 
+  programs.tmux = {
+    enable = true;
+    aggressiveResize = true;
+    shell = "${pkgs.zsh}/bin/zsh";
+    terminal = "tmux-256color";
+    historyLimit = 100000;
+    mouse = true;
+    extraConfig = ''
+      # Set status bar on
+      set -g status on
+
+      # Update the status line every second
+      set -g status-interval 1
+
+      # Set the position of window lists.
+      set -g status-justify centre # [left | centre | right]
+
+      # Set Vi style keybinding in the status line
+      set -g status-keys vi
+
+      # Set the status bar position
+      set -g status-position top # [top, bottom]
+
+      # Set status bar background and foreground color.
+      set -g status-style fg=colour136,bg="#002b36"
+
+      # Set left side status bar length and style
+      set -g status-left-length 60
+      set -g status-left-style default
+
+      # Display the session name
+      set -g status-left "#[fg=green] ❐ #S #[default]"
+
+      # Display the os version (Mac Os)
+      set -ag status-left " #[fg=black] #[fg=green,bright]  #(sw_vers -productVersion) #[default]"
+
+      # Display the battery percentage (Mac OS)
+      set -ag status-left "#[fg=green,bg=default,bright] 🔋 #(pmset -g batt | tail -1 | awk '{print $3}' | tr -d ';') #[default]"
+
+      # Set right side status bar length and style
+      set -g status-right-length 140
+      set -g status-right-style default
+
+      # Display the cpu load (Mac OS)
+      set -g status-right "#[fg=green,bg=default,bright]  #(top -l 1 | grep -E "^CPU" | sed 's/.*://') #[default]"
+
+      # Display the date
+      set -ag status-right "#[fg=white,bg=default]  %a %d #[default]"
+
+      # Display the time
+      set -ag status-right "#[fg=colour172,bright,bg=default] ⌚︎%l:%M %p #[default]"
+
+      # Display the hostname
+      set -ag status-right "#[fg=cyan,bg=default] ☠ #H #[default]"
+
+      # dim inactive pane
+      set -g window-style 'fg=color8,bg=default'
+      set -g window-active-style 'fg=color7,bg=default'
+    '';
+  };
+
   programs.zsh = {
     enable = true;
     autocd = true;
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    history = {
+      ignoreDups = true;
+      ignoreSpace = true;
+      expireDuplicatesFirst = true;
+      extended = true;
+    };
     initExtra = ''
       function mcd () {
         mkdir -p "$1" && cd "$1";
