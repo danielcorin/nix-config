@@ -1,28 +1,14 @@
 { config, pkgs, ... }:
+let
+  fonts = with pkgs; [
+    # # It is sometimes useful to fine-tune packages, for example, by applying
+    # # overrides. You can do that directly here, just don't forget the
+    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
+    # # fonts?
+    (nerdfonts.override { fonts = [ "Hack" ]; })
+  ];
 
-{
-  nixpkgs.config.allowUnfree = true;
-  # Home Manager needs a bit of information about you and the paths it should
-  # manage.
-  home.username = "danielcorin";
-  home.homeDirectory = pkgs.lib.mkForce (
-    "/Users/danielcorin"
-  );
-
-
-  # This value determines the Home Manager release that your configuration is
-  # compatible with. This helps avoid breakage when a new Home Manager release
-  # introduces backwards incompatible changes.
-  #
-  # You should not change this value, even if you update Home Manager. If you do
-  # want to update the value, then make sure to first check the Home Manager
-  # release notes.
-  home.stateVersion = "23.11"; # Please read the comment before changing.
-
-
-  # The home.packages option allows you to install Nix packages into your
-  # environment.
-  home.packages = with pkgs; [
+  system_packages = with pkgs; [
     awscli
     bat
     chamber
@@ -36,11 +22,12 @@
     glow
     goku
     jq
+    llm
     nixpkgs-fmt
     nodejs-18_x
+    pipx
     postgresql
     python3
-    pipx
     skhd
     sqlite
     tmux
@@ -51,34 +38,53 @@
     yabai
     yarn
     zoxide
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    (nerdfonts.override { fonts = [ "Hack" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
   ];
+in
+{
+  nixpkgs.config.allowUnfree = true;
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
-  home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+  # Home Manager needs a bit of information about you and the paths it should
+  # manage.
+  home = {
+    username = "danielcorin";
+    homeDirectory = pkgs.lib.mkForce (
+      "/Users/danielcorin"
+    );
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
+    # This value determines the Home Manager release that your configuration is
+    # compatible with. This helps avoid breakage when a new Home Manager release
+    # introduces backwards incompatible changes.
+    #
+    # You should not change this value, even if you update Home Manager. If you do
+    # want to update the value, then make sure to first check the Home Manager
+    # release notes.
+    stateVersion = "23.11"; # Please read the comment before changing.
+
+    # The home.packages option allows you to install Nix packages into your
+    # environment.
+    packages = with pkgs; [
+      # # You can also create simple shell scripts directly inside your
+      # # configuration. For example, this adds a command 'my-hello' to your
+      # # environment:
+      # (pkgs.writeShellScriptBin "my-hello" ''
+      #   echo "Hello, ${config.home.username}!"
+      # '')
+    ] ++ system_packages ++ fonts;
+
+    # Home Manager is pretty good at managing dotfiles. The primary way to manage
+    # plain files is through 'home.file'.
+    file = {
+      # # Building this configuration will create a copy of 'dotfiles/screenrc' in
+      # # the Nix store. Activating the configuration will then make '~/.screenrc' a
+      # # symlink to the Nix store copy.
+      # ".screenrc".source = dotfiles/screenrc;
+
+      # # You can also set the file content immediately.
+      # ".gradle/gradle.properties".text = ''
+      #   org.gradle.console=verbose
+      #   org.gradle.daemon.idletimeout=3600000
+      # '';
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -102,6 +108,9 @@
     settings = {
       live_config_reload = true;
       colors = {
+        primary = {
+          background = "#0d0c0c";
+        };
         normal = {
           black = "#333333";
           red = "#C4265E";
@@ -140,7 +149,7 @@
 
       shell = {
         program = "${pkgs.zsh}/bin/zsh";
-        args = ["--login" "-c" "tmux new-session -A -s main-alacritty"];
+        args = [ "--login" "-c" "tmux new-session -A -s main-alacritty" ];
       };
 
       font = {
@@ -188,7 +197,7 @@
           x = 2;
           y = 2;
         };
-        decorations = "Full";
+        decorations = "Buttonless";
         dynamic_padding = true;
         dynamic_title = true;
         startup_mode = "Maximized";
@@ -255,56 +264,12 @@
     historyLimit = 100000;
     mouse = true;
     extraConfig = ''
-      # Set status bar on
-      set -g status on
+      set -g status off
+      # Set inactive pane border color to gray
+      set -g pane-border-style fg=colour8
 
-      # Update the status line every second
-      set -g status-interval 1
-
-      # Set the position of window lists.
-      set -g status-justify centre # [left | centre | right]
-
-      # Set Vi style keybinding in the status line
-      set -g status-keys vi
-
-      # Set the status bar position
-      set -g status-position top # [top, bottom]
-
-      # Set status bar background and foreground color.
-      set -g status-style fg=colour136,bg="#002b36"
-
-      # Set left side status bar length and style
-      set -g status-left-length 60
-      set -g status-left-style default
-
-      # Display the session name
-      set -g status-left "#[fg=green] ❐ #S #[default]"
-
-      # Display the os version (Mac Os)
-      set -ag status-left " #[fg=black] #[fg=green,bright]  #(sw_vers -productVersion) #[default]"
-
-      # Display the battery percentage (Mac OS)
-      set -ag status-left "#[fg=green,bg=default,bright] 🔋 #(pmset -g batt | tail -1 | awk '{print $3}' | tr -d ';') #[default]"
-
-      # Set right side status bar length and style
-      set -g status-right-length 140
-      set -g status-right-style default
-
-      # Display the cpu load (Mac OS)
-      set -g status-right "#[fg=green,bg=default,bright]  #(top -l 1 | grep -E "^CPU" | sed 's/.*://') #[default]"
-
-      # Display the date
-      set -ag status-right "#[fg=white,bg=default]  %a %d #[default]"
-
-      # Display the time
-      set -ag status-right "#[fg=colour172,bright,bg=default] ⌚︎%l:%M %p #[default]"
-
-      # Display the hostname
-      set -ag status-right "#[fg=cyan,bg=default] ☠ #H #[default]"
-
-      # dim inactive pane
-      set -g window-style 'fg=color8,bg=default'
-      set -g window-active-style 'fg=color7,bg=default'
+      # Set active pane border color to white
+      set -g pane-active-border-style fg=white
     '';
   };
 
