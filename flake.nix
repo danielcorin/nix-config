@@ -13,20 +13,24 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, ... }:
     let
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         environment.systemPackages = with pkgs; [ ];
 
-        environment.variables = {
-          EDITOR = "vim";
-        };
+        environment.variables = { };
+
+        nixpkgs.overlays = [ ];
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
         # nix.package = pkgs.nix;
+
+        services.sketchybar = {
+          enable = false;
+        };
 
         # Necessary for using flakes on this system.
         nix.settings = {
@@ -52,8 +56,22 @@
         programs.zsh = {
           enable = true;
           promptInit = "autoload -U promptinit && promptinit && prompt walters && setopt prompt_sp";
+          shellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
         };
         # programs.fish.enable = true;
+
+        homebrew = {
+          enable = true;
+          onActivation = {
+            autoUpdate = true;
+            cleanup = "zap";
+          };
+          global.brewfile = true;
+          brews = [
+          ];
+          casks = [
+          ];
+        };
 
         # Set Git commit hash for darwin-version.
         system.configurationRevision = self.rev or self.dirtyRev or null;
@@ -97,6 +115,7 @@
             InitialKeyRepeat = 18; # default: 68
             KeyRepeat = 1; # default: 6
             "com.apple.trackpad.scaling" = 1.0;
+            _HIHideMenuBar = false;
           };
 
           trackpad = {

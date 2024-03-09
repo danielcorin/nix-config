@@ -3,12 +3,11 @@ let
   fonts = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
+    # # parentheses.
     (nerdfonts.override { fonts = [ "Hack" ]; })
   ];
 
-  system_packages = with pkgs; [
+  systemPackages = with pkgs; [
     awscli
     bat
     chamber
@@ -18,21 +17,25 @@ let
     direnv
     eza
     fd
+    ffmpeg
     fzf
     glow
     goku
     jq
-    llm
+    neofetch
+    nix-init
     nixpkgs-fmt
     nodejs-18_x
+    ollama
     pipx
     postgresql
     python3
+    sketchybar
+    sketchybar-app-font
     skhd
     sqlite
     tmux
     tree
-    typst
     unison
     watchexec
     yabai
@@ -41,6 +44,7 @@ let
   ];
 in
 {
+  fonts.fontconfig.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   # Home Manager needs a bit of information about you and the paths it should
@@ -69,7 +73,7 @@ in
       # (pkgs.writeShellScriptBin "my-hello" ''
       #   echo "Hello, ${config.home.username}!"
       # '')
-    ] ++ system_packages ++ fonts;
+    ] ++ systemPackages ++ fonts;
 
     # Home Manager is pretty good at managing dotfiles. The primary way to manage
     # plain files is through 'home.file'.
@@ -84,6 +88,57 @@ in
       #   org.gradle.console=verbose
       #   org.gradle.daemon.idletimeout=3600000
       # '';
+
+      # FIXME: requires `skhd -r` to take effect
+      # https://github.com/koekeishiya/skhd/issues/19
+      skhd = {
+        target = ".config/skhd/skhdrc";
+        text = ''
+          # left half
+          ctrl + alt + cmd - left : yabai -m window --grid 1:2:0:0:1:1
+
+          # bottom half
+          ctrl + alt + cmd - down : yabai -m window --grid 2:1:0:1:1:1
+
+          # top half
+          ctrl + alt + cmd - up : yabai -m window --grid 2:1:0:0:1:1
+
+          # right half
+          ctrl + alt + cmd - right : yabai -m window --grid 1:2:1:0:1:1
+
+          # maximize
+          ctrl + alt + cmd - m : yabai -m window --grid 1:1:0:0:1:1
+
+          # top left corner
+          ctrl + shift + alt - left : yabai -m window --grid 2:2:0:0:1:1
+
+          # top right corner
+          ctrl + shift + alt - up : yabai -m window --grid 2:2:1:0:1:1
+
+          # bottom left corner
+          ctrl + shift + alt - down : yabai -m window --grid 2:2:0:1:1:1
+
+          # bottom right corner
+          ctrl + shift + alt - right : yabai -m window --grid 2:2:1:1:1:1
+
+          # prev display
+          ctrl + alt - left : yabai -m window --display prev; yabai -m display --focus prev
+
+          # next display
+          ctrl + alt - right : yabai -m window --display next; yabai -m display --focus next
+
+          hyper - f: open -a "Firefox"
+          hyper - 2: open -a "Messages"
+          hyper - r: open -a "Spotify"
+          hyper - s: open -a "Slack"
+          hyper - i: open -a "Cursor"
+          hyper - p: open -a "1Password"
+          hyper - a: open "https://calendar.google.com/"
+          hyper - g: open "https://gmail.google.com/"
+          hyper - u: open "https://platform.openai.com/playground"
+          hyper - l: open "https://github.com/pulls"
+        '';
+      };
     };
   };
 
@@ -109,7 +164,7 @@ in
       live_config_reload = true;
       colors = {
         primary = {
-          background = "#0d0c0c";
+          background = "#1e1f1c";
         };
         normal = {
           black = "#333333";
@@ -130,6 +185,16 @@ in
           magenta = "#AE81FF";
           cyan = "#66D9EF";
           white = "#f8f8f2";
+        };
+        dim = {
+          black = "#1c1c1c";
+          red = "#ff6565";
+          green = "#93d44f";
+          yellow = "#eab93d";
+          blue = "#204a87";
+          magenta = "#ce5c00";
+          cyan = "#89b6e2";
+          white = "#cccccc";
         };
         cursor = {
           cursor = "0xd8d8d8";
@@ -266,7 +331,7 @@ in
     extraConfig = ''
       set -g status off
       # Set inactive pane border color to gray
-      set -g pane-border-style fg=colour8
+      set -g pane-border-style fg=color0
 
       # Set active pane border color to white
       set -g pane-active-border-style fg=white
