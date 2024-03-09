@@ -338,10 +338,6 @@ in
     '';
   };
 
-  # programs.yabai = {
-  #   enable = true;
-  # };
-
   programs.zsh = {
     enable = true;
     autocd = true;
