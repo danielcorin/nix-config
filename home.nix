@@ -1,8 +1,8 @@
 { config, pkgs, ... }:
 let
-    sse-starlette = pkgs.callPackage ./packages/sse-starlette/default.nix { };
-    httpx-sse = pkgs.callPackage ./packages/httpx-sse/default.nix { inherit sse-starlette; };
-    llm-mistral = pkgs.callPackage ./packages/llm-mistral/default.nix { inherit httpx-sse; };
+  sse-starlette = pkgs.callPackage ./packages/sse-starlette/default.nix { };
+  httpx-sse = pkgs.callPackage ./packages/httpx-sse/default.nix { inherit sse-starlette; };
+  llm-mistral = pkgs.callPackage ./packages/llm-mistral/default.nix { inherit httpx-sse; };
   fonts = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
