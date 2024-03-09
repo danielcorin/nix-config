@@ -11,28 +11,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    sf-mono-liga-src = {
-      url = "github:shaunsingh/SFMono-Nerd-Font-Ligaturized";
-      flake = false;
-    };
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, ... }:
     let
-      # Your overlay definition
-      sf-mono-liga-overlay = final: prev: {
-        sf-mono-liga-bin = prev.stdenvNoCC.mkDerivation rec {
-          pname = "sf-mono-liga-bin";
-          version = "dev";
-          src = inputs.sf-mono-liga-src;
-          dontConfigure = true;
-          installPhase = ''
-            mkdir -p $out/share/fonts/opentype
-            cp -R $src/*.otf $out/share/fonts/opentype/
-          '';
-        };
-      };
-
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
@@ -40,9 +22,7 @@
 
         environment.variables = { };
 
-        nixpkgs.overlays = [
-          sf-mono-liga-overlay
-        ];
+        nixpkgs.overlays = [ ];
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
