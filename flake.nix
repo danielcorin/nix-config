@@ -68,8 +68,10 @@
           };
           global.brewfile = true;
           brews = [
+            "llm"
           ];
           casks = [
+            "Alacritty"
           ];
         };
 
