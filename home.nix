@@ -10,6 +10,7 @@ let
   systemPackages = with pkgs; [
     awscli
     bat
+    cargo
     chamber
     coreutils
     devbox
@@ -19,17 +20,22 @@ let
     fd
     ffmpeg
     fzf
+    git-lfs
     glow
     goku
     jq
     neofetch
+    neovim
     nix-init
     nixpkgs-fmt
     nodejs-18_x
-    ollama
     pipx
     postgresql
+    pre-commit
     python3
+    ripgrep
+    rlwrap
+    rustc
     sketchybar
     sketchybar-app-font
     skhd
@@ -133,9 +139,10 @@ in
           hyper - s: open -a "Slack"
           hyper - i: open -a "Cursor"
           hyper - p: open -a "1Password"
+          hyper - space: open -a "Obsidian"
           hyper - a: open "https://calendar.google.com/"
           hyper - g: open "https://gmail.google.com/"
-          hyper - u: open "https://platform.openai.com/playground"
+          hyper - u: open "https://console.anthropic.com/workbench?new=1"
           hyper - l: open "https://github.com/pulls"
         '';
       };
@@ -234,7 +241,7 @@ in
           family = "Hack Nerd Font Mono";
           style = "Bold";
         };
-        size = 14.0;
+        size = 13.0;
       };
       keyboard.bindings = [
         # ⌘ + enter puts window in macOS full screen
@@ -302,6 +309,7 @@ in
 
   programs.git = {
     enable = true;
+    lfs.enable = true;
     userName = "Dan Corin";
     userEmail = "dcorin6@gmail.com";
     extraConfig = {
@@ -390,6 +398,10 @@ in
 
       # python
       ea = ". env/bin/activate";
+      venv = "python3 -m venv env";
+
+      # sqlite
+      sqlite3 = "rlwrap sqlite3";
 
       # caffeinate
       caf = "pgrep caffeinate > /dev/null && echo '☕' || echo '💤'";

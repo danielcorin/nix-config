@@ -18,7 +18,7 @@
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
-        environment.systemPackages = with pkgs; [ ];
+        environment.systemPackages = with pkgs; [ ollama ];
 
         environment.variables = { };
 
@@ -55,7 +55,8 @@
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.zsh = {
           enable = true;
-          promptInit = "autoload -U promptinit && promptinit && prompt walters && setopt prompt_sp";
+          # using starship
+          # promptInit = "autoload -U promptinit && promptinit && prompt walters && setopt prompt_sp";
           shellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
         };
         # programs.fish.enable = true;
@@ -69,9 +70,22 @@
           global.brewfile = true;
           brews = [
             "llm"
+            "lua"
+            "nowplaying-cli"
+            "switchaudio-osx"
           ];
           casks = [
             "Alacritty"
+            "font-sf-mono"
+            "font-sf-pro"
+            "sf-symbols"
+          ];
+          taps = [
+            "homebrew/bundle"
+            "homebrew/cask-fonts"
+            "homebrew/services"
+            # custom
+            "FelixKratz/formulae" # borders
           ];
         };
 
@@ -111,12 +125,14 @@
           NSGlobalDomain = {
             AppleShowAllExtensions = false;
             AppleInterfaceStyle = "Dark";
+            AppleFontSmoothing = 1;
             AppleShowScrollBars = "Always";
             NSAutomaticQuoteSubstitutionEnabled = false;
             # set key repeat to be faster
             InitialKeyRepeat = 18; # default: 68
             KeyRepeat = 1; # default: 6
             "com.apple.trackpad.scaling" = 1.0;
+            "com.apple.sound.beep.feedback" = 0;
             _HIHideMenuBar = false;
           };
 
