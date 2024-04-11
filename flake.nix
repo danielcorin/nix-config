@@ -69,6 +69,7 @@
           };
           global.brewfile = true;
           brews = [
+            "colima"
             "llm"
             "lua"
             "nowplaying-cli"
@@ -78,6 +79,7 @@
             "Alacritty"
             "font-sf-mono"
             "font-sf-pro"
+            "intellij-idea-ce"
             "sf-symbols"
           ];
           taps = [
