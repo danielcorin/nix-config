@@ -28,8 +28,6 @@ let
     neovim
     nix-init
     nixpkgs-fmt
-    nodejs-18_x
-    pipx
     postgresql
     pre-commit
     python3
@@ -171,7 +169,7 @@ in
       live_config_reload = true;
       colors = {
         primary = {
-          background = "#1e1f1c";
+          background = "#1E1F1C";
         };
         normal = {
           black = "#333333";
@@ -293,7 +291,7 @@ in
 
   programs.fzf = {
     enable = true;
-    defaultCommand = "${pkgs.fd}/bin/fd --type file --hidden";
+    defaultCommand = "${pkgs.ripgrep}/bin/rg --files";
 
     defaultOptions = [
       "--height='80%'"
@@ -356,6 +354,16 @@ in
       ignoreSpace = true;
       expireDuplicatesFirst = true;
       extended = true;
+      size = 10000000;
+      save = 10000000;
+      share = true;
+      ignorePatterns = [
+        "(ls|cd|pwd|exit|mcd)*"
+        "git commit *"
+        "git clone *"
+        "git add *"
+        "history *"
+      ];
     };
     initExtra = ''
       function mcd () {
@@ -398,7 +406,8 @@ in
 
       # python
       ea = ". env/bin/activate";
-      venv = "python3 -m venv env";
+      # python3 is homebrew managed
+      venv = "python -m venv .venv";
 
       # sqlite
       sqlite3 = "rlwrap sqlite3";

@@ -29,3 +29,4 @@ Below is a non-exhaustive list of helpful resources
 - https://github.com/malob/nixpkgs
 - https://github.com/milogert/dotfiles-1/blob/925236213c09d19c091878b6f7070f90f99952fc/hosts/_common/darwin/tmux.nix
 - https://www.josean.com/posts/sketchybar-setup
+- https://martinheinz.dev/blog/110
