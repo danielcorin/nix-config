@@ -28,6 +28,22 @@
         services.nix-daemon.enable = true;
         # nix.package = pkgs.nix;
 
+        launchd = {
+          user = {
+            agents = {
+              ollama-serve = {
+                command = "${pkgs.ollama}/bin/ollama serve";
+                serviceConfig = {
+                  KeepAlive = true;
+                  RunAtLoad = true;
+                  StandardOutPath = "/tmp/ollama_danielcorin.out.log";
+                  StandardErrorPath = "/tmp/ollama_danielcorin.err.log";
+                };
+              };
+            };
+          };
+        };
+
         services.sketchybar = {
           enable = false;
         };
