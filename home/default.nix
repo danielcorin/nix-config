@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 let
+  isDarwin = pkgs.stdenv.isDarwin;
   fonts = with pkgs; [
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -49,15 +50,17 @@ let
 in
 {
   imports = [
-    ./programs/alacritty.nix
-    ./programs/bat.nix
-    ./programs/direnv.nix
-    ./programs/eza.nix
-    ./programs/fzf.nix
-    ./programs/git.nix
-    ./programs/starship.nix
-    ./programs/tmux.nix
-    ./programs/zsh.nix
+    ./alacritty
+    ./bat
+    ./direnv
+    ./eza
+    ./fzf
+    ./git
+    ./karabiner
+    ./skhd
+    ./starship
+    ./tmux
+    ./zsh
   ];
 
   fonts.fontconfig.enable = true;
@@ -104,8 +107,6 @@ in
       #   org.gradle.console=verbose
       #   org.gradle.daemon.idletimeout=3600000
       # '';
-
-      skhd = import ./files/skhd.nix;
     };
   };
 

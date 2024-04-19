@@ -176,7 +176,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.verbose = true;
-            home-manager.users.danielcorin = import ./home.nix;
+            home-manager.users.danielcorin = import ./home;
           }
         ];
       };

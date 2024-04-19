@@ -15,11 +15,11 @@
       save = 10000000;
       share = true;
       ignorePatterns = [
-        "(ls|cd|pwd|exit|mcd)*"
-        "git commit *"
-        "git clone *"
-        "git add *"
-        "history *"
+        "(ls|cd|pwd|exit|mcd|dr)*"
+        "git commit*"
+        "git clone*"
+        "git add*"
+        "history*"
       ];
     };
     initExtra = ''

@@ -1,0 +1,2 @@
+{:main [{:des "caps lock to hyper" :rules [[:##caps_lock :!QWEright_shift nil {:alone :escape}]
+                                           [:!QWER#Pescape :caps_lock]]}]}
