@@ -90,6 +90,8 @@
             "lua"
             "nowplaying-cli"
             "switchaudio-osx"
+            "temporal"
+            "tctl"
           ];
           casks = [
             "Alacritty"

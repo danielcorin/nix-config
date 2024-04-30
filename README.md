@@ -15,6 +15,12 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update
 ```
 
+## Update flake
+
+```sh
+nix flake update
+```
+
 ## Resources that helped created this 🙏
 
 I use https://cs.github.com to look around at configurations folks have generously open sourced.
