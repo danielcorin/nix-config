@@ -14,15 +14,18 @@ let
     cargo
     chamber
     coreutils
+    deno
     devbox
     difftastic
     direnv
+    docker
     eza
     fd
     ffmpeg
     fzf
     git-lfs
     glow
+    go
     goku
     jq
     neofetch
@@ -45,6 +48,7 @@ let
     watchexec
     yabai
     yarn
+    yt-dlp
     zoxide
   ];
 in

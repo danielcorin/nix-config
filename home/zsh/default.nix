@@ -62,7 +62,7 @@
       cat = "bat";
 
       # python
-      ea = ". env/bin/activate";
+      ea = ". .venv/bin/activate";
       # python3 is homebrew managed
       venv = "python -m venv .venv";
 
