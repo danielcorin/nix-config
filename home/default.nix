@@ -32,6 +32,7 @@ let
     neovim
     nix-init
     nixpkgs-fmt
+    pipx
     postgresql
     pre-commit
     python3

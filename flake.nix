@@ -20,8 +20,6 @@
         # $ nix-env -qaP | grep wget
         environment.systemPackages = with pkgs; [ ollama ];
 
-        environment.variables = { };
-
         nixpkgs.overlays = [ ];
 
         # Auto upgrade nix package and the daemon service.
@@ -64,8 +62,10 @@
         '';
         nix.gc = {
           automatic = true;
-          interval = { Weekday = 0; };
-          options = "--delete-older-than 30d";
+          interval = {
+              Day = 7;
+          };
+          options = "--delete-older-than 7d";
         };
 
         # Create /etc/zshrc that loads the nix-darwin environment.
