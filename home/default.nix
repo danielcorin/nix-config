@@ -19,6 +19,7 @@ let
     difftastic
     direnv
     docker
+    espanso
     eza
     fd
     ffmpeg
@@ -32,6 +33,7 @@ let
     neovim
     nix-init
     nixpkgs-fmt
+    nodejs
     pipx
     postgresql
     pre-commit
@@ -58,6 +60,7 @@ in
     ./alacritty
     ./bat
     ./direnv
+    ./espanso
     ./eza
     ./fzf
     ./git

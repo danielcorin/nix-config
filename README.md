@@ -37,3 +37,4 @@ Below is a non-exhaustive list of helpful resources
 - https://www.josean.com/posts/sketchybar-setup
 - https://martinheinz.dev/blog/110
 - https://github.com/davish/setup/
+- https://github.com/legendofmiracles/dotnix/blob/8dfa01af04d6391a1f5cb2c788bdecc1ee748ca9/hm/espanso.nix#L4
