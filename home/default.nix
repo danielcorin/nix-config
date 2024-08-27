@@ -32,6 +32,7 @@ let
     neovim
     nix-init
     nixpkgs-fmt
+    nodejs_22
     pipx
     postgresql
     pre-commit
@@ -65,6 +66,7 @@ in
     ./skhd
     ./starship
     ./tmux
+    ./wezterm
     ./zsh
   ];
 

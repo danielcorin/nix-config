@@ -94,11 +94,11 @@
             "tctl"
           ];
           casks = [
-            "Alacritty"
             "font-sf-mono"
             "font-sf-pro"
             "intellij-idea-ce"
             "sf-symbols"
+            "Wezterm"
           ];
           taps = [
             "homebrew/bundle"
