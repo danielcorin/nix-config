@@ -18,7 +18,7 @@ return {
 
   -- Cursor Style
   default_cursor_style = "SteadyBar",
-  cursor_thickness = "0.1",
+  cursor_thickness = 1,
 
   color_scheme = "Monokai (dark) (terminal.sexy)",
 
