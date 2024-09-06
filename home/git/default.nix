@@ -14,7 +14,7 @@
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
     };
-    difftastic = {
+    delta = {
       enable = true;
     };
   };

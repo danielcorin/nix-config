@@ -14,9 +14,9 @@ let
     cargo
     chamber
     coreutils
+    delta
     deno
     devbox
-    difftastic
     direnv
     docker
     eza
@@ -37,6 +37,7 @@ let
     postgresql
     pre-commit
     python3
+    railway
     ripgrep
     rlwrap
     rustc
