@@ -23,6 +23,7 @@ let
     fd
     ffmpeg
     fzf
+    gh
     git-lfs
     glow
     go
