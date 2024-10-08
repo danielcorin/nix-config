@@ -7,6 +7,8 @@ return {
   -- Hide traffic lights but allow window resizing
   window_decorations = "RESIZE",
 
+  hide_tab_bar_if_only_one_tab = true,
+
   -- Set the font settings
   font_size = 13.0,
 
