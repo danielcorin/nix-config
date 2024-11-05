@@ -48,7 +48,7 @@
 
         # Necessary for using flakes on this system.
         nix.settings = {
-          experimental-features = "nix-command flakes repl-flake";
+          experimental-features = "nix-command flakes";
           trusted-users = [ "@admin" "danielcorin" ];
           max-jobs = 16;
           cores = 16;

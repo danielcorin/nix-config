@@ -39,7 +39,7 @@
       eval "$(zoxide init zsh)"
     '';
     shellAliases = {
-      dr = "darwin-rebuild switch --flake ~/.config/nix/flake.nix";
+      dr = "darwin-rebuild switch --flake ~/.config/nix";
       h = "history";
       o = "open .";
 
