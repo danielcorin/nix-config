@@ -33,7 +33,6 @@ let
     neovim
     nix-init
     nixpkgs-fmt
-    nodejs_22
     pipx
     postgresql
     pre-commit
@@ -45,7 +44,6 @@ let
     sketchybar
     sketchybar-app-font
     skhd
-    sqlite
     tmux
     tree
     unison

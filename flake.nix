@@ -86,12 +86,15 @@
           global.brewfile = true;
           brews = [
             "colima"
+            "node"
             "llm"
             "lua"
             "nowplaying-cli"
+            "sqlite3"
             "switchaudio-osx"
             "temporal"
             "tctl"
+            "uv"
           ];
           casks = [
             "font-sf-mono"

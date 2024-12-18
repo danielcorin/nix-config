@@ -15,7 +15,7 @@
       save = 10000000;
       share = true;
       ignorePatterns = [
-        "(ls|cd|pwd|exit|mcd|dr)*"
+        "(ls|cd|pwd|exit|mcd|z|dr)*"
         "git commit*"
         "git clone*"
         "git add*"
@@ -66,9 +66,6 @@
       ea = ". .venv/bin/activate";
       # python3 is homebrew managed
       venv = "python -m venv .venv";
-
-      # sqlite
-      sqlite3 = "rlwrap sqlite3";
 
       # caffeinate
       caf = "pgrep caffeinate > /dev/null && echo '☕' || echo '💤'";
