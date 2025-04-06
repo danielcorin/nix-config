@@ -22,8 +22,6 @@
 
         nixpkgs.overlays = [ ];
 
-        # Auto upgrade nix package and the daemon service.
-        services.nix-daemon.enable = true;
         # nix.package = pkgs.nix;
 
         services.sketchybar = {
@@ -105,13 +103,13 @@
 
         # Used for backwards compatibility, please read the changelog before changing.
         # $ darwin-rebuild changelog
-        system.stateVersion = 4;
+        system.stateVersion = 5;
 
         # The platform the configuration will be used on.
         nixpkgs.hostPlatform = "aarch64-darwin";
 
         # Unlocking sudo via fingerprint
-        security.pam.enableSudoTouchIdAuth = true;
+        security.pam.services.sudo_local.touchIdAuth = true;
 
         system.defaults = {
           dock = {
@@ -170,6 +168,7 @@
             home-manager.useUserPackages = true;
             home-manager.verbose = true;
             home-manager.users.danielcorin = import ./home;
+            nixpkgs.config.allowUnfree = true;
           }
         ];
       };
