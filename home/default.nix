@@ -15,7 +15,6 @@ let
     chamber
     coreutils
     delta
-    deno
     devbox
     direnv
     docker
@@ -38,6 +37,7 @@ let
     pre-commit
     python3
     railway
+    rclone
     ripgrep
     rlwrap
     rustc

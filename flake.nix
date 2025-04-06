@@ -18,29 +18,13 @@
       configuration = { pkgs, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
-        environment.systemPackages = with pkgs; [ ollama ];
+        environment.systemPackages = with pkgs; [ ];
 
         nixpkgs.overlays = [ ];
 
         # Auto upgrade nix package and the daemon service.
         services.nix-daemon.enable = true;
         # nix.package = pkgs.nix;
-
-        launchd = {
-          user = {
-            agents = {
-              ollama-serve = {
-                command = "${pkgs.ollama}/bin/ollama serve";
-                serviceConfig = {
-                  KeepAlive = true;
-                  RunAtLoad = true;
-                  StandardOutPath = "/tmp/ollama_danielcorin.out.log";
-                  StandardErrorPath = "/tmp/ollama_danielcorin.err.log";
-                };
-              };
-            };
-          };
-        };
 
         services.sketchybar = {
           enable = false;
@@ -86,10 +70,13 @@
           global.brewfile = true;
           brews = [
             "colima"
+            "deno"
             "node"
             "llm"
             "lua"
             "nowplaying-cli"
+            "ollama"
+            "repomix"
             "sqlite3"
             "switchaudio-osx"
             "temporal"
@@ -100,6 +87,7 @@
             "font-sf-mono"
             "font-sf-pro"
             "intellij-idea-ce"
+            "macfuse"
             "sf-symbols"
             "Wezterm"
           ];
