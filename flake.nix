@@ -85,6 +85,7 @@
             "font-sf-mono"
             "font-sf-pro"
             "intellij-idea-ce"
+            "keycastr"
             "macfuse"
             "sf-symbols"
             "Wezterm"
