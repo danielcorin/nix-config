@@ -67,7 +67,9 @@
           };
           global.brewfile = true;
           brews = [
+            "cloudflared"
             "colima"
+            "create-dmg"
             "deno"
             "node"
             "llm"
@@ -80,6 +82,7 @@
             "temporal"
             "tctl"
             "uv"
+            "wrangler"
           ];
           casks = [
             "font-sf-mono"
