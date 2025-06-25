@@ -10,7 +10,6 @@ let
   ];
 
   systemPackages = with pkgs; [
-    awscli
     bat
     cargo
     chamber
