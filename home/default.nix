@@ -11,6 +11,7 @@ let
 
   systemPackages = with pkgs; [
     bat
+    bun
     cargo
     chamber
     coreutils
