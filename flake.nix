@@ -78,6 +78,7 @@
             "node"
             "nowplaying-cli"
             "ollama"
+            "pnpm"
             "repomix"
             "sqlite3"
             "switchaudio-osx"
