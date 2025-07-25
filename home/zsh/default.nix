@@ -22,6 +22,9 @@
         "history*"
       ];
     };
+    envExtra = ''
+      export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+    '';
     initContent = ''
       export EDITOR="vim"
       function mcd () {
