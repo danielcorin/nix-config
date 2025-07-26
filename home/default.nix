@@ -34,6 +34,7 @@ let
     nix-init
     nixpkgs-fmt
     pipx
+    pngquant
     postgresql
     pre-commit
     python3
