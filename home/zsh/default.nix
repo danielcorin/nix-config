@@ -24,6 +24,7 @@
     };
     envExtra = ''
       export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC="1"
+      export DISABLE_TELEMETRY="1"
     '';
     initContent = ''
       export EDITOR="vim"

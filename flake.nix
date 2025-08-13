@@ -71,6 +71,7 @@
             "colima"
             "create-dmg"
             "deno"
+            "jamescun/formulas/httplog"
             "just"
             "licenseplist"
             "llm"

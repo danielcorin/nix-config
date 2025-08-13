@@ -49,7 +49,7 @@
       hyper - g: open "https://gmail.google.com/"
       hyper - u: open "https://console.anthropic.com/workbench?new=1"
       hyper - l: open "https://github.com/pulls"
-      hyper - b: cursor "/Users/danielcorin/dev/blog"
+      hyper - b: cursor "/Users/danielcorin/dev/lab/thought-eddies"
     '';
   };
 }
