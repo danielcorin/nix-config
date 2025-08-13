@@ -43,8 +43,6 @@ let
     ripgrep
     rlwrap
     rustc
-    sketchybar
-    sketchybar-app-font
     skhd
     tmux
     tree
