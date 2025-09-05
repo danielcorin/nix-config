@@ -63,6 +63,7 @@
           };
           global.brewfile = true;
           brews = [
+            "ast-grep"
             "cloudflared"
             "colima"
             "create-dmg"
