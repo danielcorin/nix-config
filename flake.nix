@@ -69,6 +69,7 @@
             "create-dmg"
             "deno"
             "jamescun/formulas/httplog"
+            "jj"
             "just"
             "licenseplist"
             "llm"
