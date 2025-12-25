@@ -4,9 +4,9 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "Dan Corin";
-    userEmail = "dcorin6@gmail.com";
-    extraConfig = {
+    settings = {
+      user.name = "Dan Corin";
+      user.email = "dcorin6@gmail.com";
       branch.autosetuprebase = "always";
       color.ui = true;
       github.user = "danielcorin";
@@ -14,9 +14,11 @@
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
     };
-    delta = {
-      enable = true;
-    };
+  };
+
+  programs.delta = {
+    enable = true;
+    enableGitIntegration = true;
   };
 }
 

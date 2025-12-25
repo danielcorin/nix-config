@@ -29,6 +29,7 @@ let
     go
     goku
     jq
+    lazygit
     neofetch
     neovim
     nix-init
@@ -63,7 +64,6 @@ in
     ./fzf
     ./git
     ./karabiner
-    ./skhd
     ./starship
     ./tmux
     ./wezterm

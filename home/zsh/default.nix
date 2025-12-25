@@ -66,6 +66,9 @@
       # colorful cat
       cat = "bat";
 
+      # git tui
+      lg = "lazygit";
+
       # python
       ea = ". .venv/bin/activate";
       # python3 is homebrew managed
