@@ -44,7 +44,6 @@ let
     ripgrep
     rlwrap
     rustc
-    skhd
     tmux
     tree
     unison
