@@ -115,6 +115,7 @@
           global.brewfile = true;
           brews = [
             "ast-grep"
+            "bubblewrap"
             "cloudflared"
             "colima"
             "create-dmg"
