@@ -115,12 +115,12 @@
           global.brewfile = true;
           brews = [
             "ast-grep"
-            "bubblewrap"
             "cloudflared"
             "colima"
             "create-dmg"
             "deno"
             "flyctl"
+            "hcloud"
             "jamescun/formulas/httplog"
             "jj"
             "just"
