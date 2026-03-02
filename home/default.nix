@@ -63,6 +63,7 @@ in
     ./fzf
     ./git
     ./karabiner
+    ./skhd
     ./starship
     ./tmux
     ./wezterm
