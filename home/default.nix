@@ -48,7 +48,6 @@ let
     tree
     unison
     watchexec
-    yabai
     yarn
     yt-dlp
     zoxide

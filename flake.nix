@@ -83,6 +83,7 @@
             "pnpm"
             "repomix"
             "koekeishiya/formulae/skhd"
+            "koekeishiya/formulae/yabai"
             "sox"
             "sqlite3"
             "swiftformat"
