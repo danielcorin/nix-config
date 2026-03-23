@@ -5,5 +5,6 @@ in
 {
   home.file.".skhdrc" = lib.mkIf isDarwin {
     source = ./skhdrc;
+    force = true;
   };
 }
