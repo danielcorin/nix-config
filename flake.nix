@@ -99,6 +99,7 @@
             "font-sf-mono"
             "font-sf-pro"
             "intellij-idea-ce"
+            "karabiner-elements"
             "keycastr"
             "macfuse"
             "sf-symbols"
