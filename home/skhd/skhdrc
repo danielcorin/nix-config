@@ -31,7 +31,6 @@ ctrl + alt - left : yabai -m window --display prev; yabai -m display --focus pre
 # next display
 ctrl + alt - right : yabai -m window --display next; yabai -m display --focus next
 
-hyper - f: open -a "Firefox"
 hyper - 2: open -a "Messages"
 hyper - r: open -a "Spotify"
 hyper - s: open -a "Slack"
@@ -40,6 +39,5 @@ hyper - p: open -a "1Password"
 hyper - space: open -a "Obsidian"
 hyper - a: open "https://calendar.google.com/"
 hyper - g: open "https://gmail.google.com/"
-hyper - u: open "https://console.anthropic.com/workbench?new=1"
 hyper - l: open "https://github.com/pulls"
 hyper - b: code "/Users/danielcorin/dev/thought-eddies"

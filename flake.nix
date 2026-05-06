@@ -97,8 +97,8 @@
           casks = [
             "blackhole-2ch"
             "font-sf-mono"
+            "ghostty"
             "font-sf-pro"
-            "intellij-idea-ce"
             "karabiner-elements"
             "keycastr"
             "macfuse"

@@ -60,6 +60,7 @@ in
     ./direnv
     ./eza
     ./fzf
+    ./ghostty
     ./git
     ./karabiner
     ./skhd
