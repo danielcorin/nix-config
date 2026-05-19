@@ -15,7 +15,6 @@ let
     cargo
     chamber
     coreutils
-    delta
     devbox
     direnv
     docker

@@ -13,12 +13,8 @@
       push.default = "tracking";
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
+      core.pager = "hunk pager";
     };
-  };
-
-  programs.delta = {
-    enable = true;
-    enableGitIntegration = true;
   };
 }
 

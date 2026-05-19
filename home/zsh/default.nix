@@ -40,6 +40,16 @@
         fi
       }
 
+      function kp() {
+        local pid
+        pid=$(lsof -ti :$1)
+        if [ -z "$pid" ]; then
+          echo "No process found on port $1"
+        else
+          kill -9 $pid && echo "Killed process $pid on port $1"
+        fi
+      }
+
       eval "$(zoxide init zsh)"
     '';
     shellAliases = {
