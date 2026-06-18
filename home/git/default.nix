@@ -4,6 +4,11 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
+    ignores = [
+      "**/.claude/settings.local.json"
+      ".DS_Store"
+      "attic"
+    ];
     settings = {
       user.name = "Dan Corin";
       user.email = "dcorin6@gmail.com";

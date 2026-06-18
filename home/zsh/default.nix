@@ -41,12 +41,12 @@
       }
 
       function kp() {
-        local pid
-        pid=$(lsof -ti :$1)
-        if [ -z "$pid" ]; then
+        local pids
+        pids=(''${(f)"$(lsof -ti :$1)"})
+        if [ -z "$pids" ]; then
           echo "No process found on port $1"
         else
-          kill -9 $pid && echo "Killed process $pid on port $1"
+          kill -9 ''${pids[@]} && echo "Killed ''${#pids[@]} process(es) on port $1"
         fi
       }
 
