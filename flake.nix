@@ -85,6 +85,7 @@
             "koekeishiya/formulae/skhd"
             "koekeishiya/formulae/yabai"
             "sox"
+            "gromgit/fuse/sshfs-mac"
             "sqlite3"
             "swiftformat"
             "switchaudio-osx"
@@ -111,6 +112,7 @@
             "homebrew/services"
             # custom
             "FelixKratz/formulae" # borders
+            "gromgit/fuse" # sshfs-mac
             "koekeishiya/formulae" # skhd
           ];
         };
