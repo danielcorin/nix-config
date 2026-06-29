@@ -19,6 +19,7 @@ let
     direnv
     docker
     eza
+    fastfetch
     fd
     ffmpeg
     fzf
@@ -29,7 +30,6 @@ let
     goku
     jq
     lazygit
-    neofetch
     neovim
     nix-init
     nixpkgs-fmt
