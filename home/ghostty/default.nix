@@ -36,6 +36,9 @@
     window-padding-x = 2
     window-padding-y = 2
 
+    # Global hotkey to show/hide Ghostty (fires even when unfocused)
+    keybind = global:ctrl+space=toggle_visibility
+
     # Navigate between panes with Cmd+Opt+Arrow
     keybind = cmd+opt+left=goto_split:left
     keybind = cmd+opt+right=goto_split:right
