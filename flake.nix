@@ -96,7 +96,6 @@
             "wrangler"
           ];
           casks = [
-            "blackhole-2ch"
             "font-sf-mono"
             "ghostty"
             "font-sf-pro"
