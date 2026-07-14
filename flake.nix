@@ -76,6 +76,7 @@
             "licenseplist"
             "llm"
             "lua"
+            "mise"
             "node"
             "nowplaying-cli"
             "ollama"
