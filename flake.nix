@@ -93,6 +93,7 @@
             "tctl"
             "uv"
             "whisper-cpp"
+            "xcodegen"
             "wrangler"
           ];
           casks = [
