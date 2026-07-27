@@ -33,7 +33,9 @@
         };
 
         # Build Linux binaries
-        nix.linux-builder.enable = true;
+        # Disabled: the launchd job was crash-looping every ~8s, rebuilding its
+        # 2.3GB erofs store.img each cycle (~100MB/s sustained disk writes).
+        nix.linux-builder.enable = false;
 
         nix.extraOptions = ''
           extra-platforms = x86_64-darwin aarch64-darwin
