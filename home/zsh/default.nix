@@ -88,9 +88,9 @@
       # python3 is homebrew managed
       venv = "python -m venv .venv";
 
-      # caffeinate
-      caf = "pgrep caffeinate > /dev/null && echo '☕' || echo '💤'";
-      tcaf = "pgrep caffeinate > /dev/null && kill $(pgrep caffeinate) || caffeinate -dim &";
+      # disable sleep
+      caf = "pmset -g | grep -q 'disablesleep[[:space:]]*1' && echo '☕' || echo '💤'";
+      tcaf = "if pmset -g | grep -q 'disablesleep[[:space:]]*1'; then sudo pmset -a disablesleep 0; else sudo pmset -a disablesleep 1; fi";
     };
   };
 }
