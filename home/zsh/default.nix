@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ ... }:
 
 {
   programs.zsh = {
@@ -27,7 +27,7 @@
       export DISABLE_TELEMETRY="1"
     '';
     profileExtra = ''
-      # Migrated from pipx-created ~/.zprofile
+      # User-level executables installed outside the Nix profile.
       export PATH="$PATH:$HOME/.local/bin"
     '';
     initContent = ''
@@ -54,7 +54,9 @@
         fi
       }
 
-      eval "$(zoxide init zsh)"
+      if command -v mise >/dev/null; then
+        eval "$(mise activate zsh)"
+      fi
     '';
     shellAliases = {
       dr = "darwin-rebuild switch --flake ~/.config/nix";
@@ -85,7 +87,7 @@
 
       # python
       ea = ". .venv/bin/activate";
-      # python3 is homebrew managed
+      # Python comes from the active mise or nix-direnv project environment.
       venv = "python -m venv .venv";
 
       # disable sleep

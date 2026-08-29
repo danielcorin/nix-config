@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin = {
-      url = "github:LnL7/nix-darwin";
+      url = "github:nix-darwin/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -13,194 +13,31 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, ... }:
-    let
-      configuration = { pkgs, ... }: {
-        # List packages installed in system profile. To search by name, run:
-        # $ nix-env -qaP | grep wget
-        environment.systemPackages = with pkgs; [ ];
-
-        nixpkgs.overlays = [ ];
-
-        # nix.package = pkgs.nix;
-
-        # Necessary for using flakes on this system.
-        nix.settings = {
-          experimental-features = "nix-command flakes";
-          trusted-users = [ "@admin" "danielcorin" ];
-          max-jobs = 16;
-          cores = 16;
-        };
-
-        # Build Linux binaries
-        # Disabled: the launchd job was crash-looping every ~8s, rebuilding its
-        # 2.3GB erofs store.img each cycle (~100MB/s sustained disk writes).
-        nix.linux-builder.enable = false;
-
-        nix.extraOptions = ''
-          extra-platforms = x86_64-darwin aarch64-darwin
-        '';
-        nix.gc = {
-          automatic = true;
-          interval = {
-              Day = 7;
-          };
-          options = "--delete-older-than 7d";
-        };
-
-        # Create /etc/zshrc that loads the nix-darwin environment.
-        programs.zsh = {
-          enable = true;
-          # using starship
-          # promptInit = "autoload -U promptinit && promptinit && prompt walters && setopt prompt_sp";
-          shellInit = ''eval "$(/opt/homebrew/bin/brew shellenv)"'';
-        };
-        # programs.fish.enable = true;
-
-        homebrew = {
-          enable = true;
-          onActivation = {
-            autoUpdate = true;
-            cleanup = "zap";
-          };
-          global.brewfile = true;
-          brews = [
-            "ast-grep"
-            "cloudflared"
-            "colima"
-            "create-dmg"
-            "deno"
-            "flyctl"
-            "hcloud"
-            "hledger"
-            "jamescun/formulas/httplog"
-            "jj"
-            "just"
-            "licenseplist"
-            "llm"
-            "lua"
-            "mise"
-            "node"
-            "nowplaying-cli"
-            "ollama"
-            "opencode"
-            "pnpm"
-            "poppler"
-            "repomix"
-            "koekeishiya/formulae/skhd"
-            "koekeishiya/formulae/yabai"
-            "sox"
-            "gromgit/fuse/sshfs-mac"
-            "sqlite3"
-            "swiftformat"
-            "switchaudio-osx"
-            "temporal"
-            "tctl"
-            "uv"
-            "whisper-cpp"
-            "xcodegen"
-            "wrangler"
-          ];
-          casks = [
-            "font-sf-mono"
-            "ghostty"
-            "font-sf-pro"
-            "karabiner-elements"
-            "keycastr"
-            "macfuse"
-            "sf-symbols"
-            "Wezterm"
-          ];
-          taps = [
-            "homebrew/bundle"
-            "homebrew/cask-fonts"
-            "homebrew/services"
-            # custom
-            "FelixKratz/formulae" # borders
-            "gromgit/fuse" # sshfs-mac
-            "koekeishiya/formulae" # skhd
-          ];
-        };
-
-        # Set Git commit hash for darwin-version.
-        system.configurationRevision = self.rev or self.dirtyRev or null;
-
-        # Used for backwards compatibility, please read the changelog before changing.
-        # $ darwin-rebuild changelog
-        system.stateVersion = 5;
-
-        # Set the primary user for options that require it
-        system.primaryUser = "danielcorin";
-
-        # The platform the configuration will be used on.
-        nixpkgs.hostPlatform = "aarch64-darwin";
-
-        # Unlocking sudo via fingerprint
-        security.pam.services.sudo_local.touchIdAuth = true;
-
-        system.defaults = {
-          dock = {
-            orientation = "left";
-            autohide = true;
-            autohide-delay = 0.0;
-            showhidden = true;
-            show-recents = false;
-            tilesize = 32;
-            largesize = 48;
-            magnification = true;
-            mineffect = "suck";
-            launchanim = false;
-          };
-
-          menuExtraClock = {
-            IsAnalog = true;
-          };
-
-          screencapture.location = "~/Desktop";
-
-          NSGlobalDomain = {
-            AppleShowAllExtensions = false;
-            AppleInterfaceStyle = "Dark";
-            AppleFontSmoothing = 1;
-            AppleShowScrollBars = "Always";
-            NSAutomaticQuoteSubstitutionEnabled = false;
-            # set key repeat to be faster
-            InitialKeyRepeat = 18; # default: 68
-            KeyRepeat = 1; # default: 6
-            "com.apple.trackpad.scaling" = 1.0;
-            "com.apple.sound.beep.feedback" = 0;
-            _HIHideMenuBar = false;
-          };
-
-          trackpad = {
-            Clicking = true;
-          };
-
-          # TODO
-          # NSGlobalDomain.NSStatusItemSelectionPadding = 6;
-          # NSGlobalDomain.NSStatusItemSpacing = 6;
-        };
-      };
-    in
+  outputs =
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .
-      # "dcmbp" is the `hostname`
-      darwinConfigurations."dcmbp" = nix-darwin.lib.darwinSystem {
+      self,
+      nix-darwin,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    {
+      darwinConfigurations.dcmbp = nix-darwin.lib.darwinSystem {
+        specialArgs = { inherit self; };
         modules = [
-          configuration
+          ./hosts/dcmbp
           home-manager.darwinModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.verbose = true;
             home-manager.users.danielcorin = import ./home;
-            nixpkgs.config.allowUnfree = true;
           }
         ];
       };
 
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."dcmbp".pkgs;
+      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-tree;
+
+      checks.aarch64-darwin.dcmbp = self.darwinConfigurations.dcmbp.system;
     };
 }
