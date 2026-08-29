@@ -57,7 +57,11 @@
 
       shell = {
         program = "${pkgs.zsh}/bin/zsh";
-        args = [ "--login" "-c" "tmux new-session -A -s main-alacritty" ];
+        args = [
+          "--login"
+          "-c"
+          "tmux new-session -A -s main-alacritty"
+        ];
       };
 
       font = {
@@ -81,23 +85,67 @@
       };
       keyboard.bindings = [
         # ⌘ + enter puts window in macOS full screen
-        { key = "Enter"; mods = "Command"; action = "ToggleFullscreen"; }
+        {
+          key = "Enter";
+          mods = "Command";
+          action = "ToggleFullscreen";
+        }
         # opt + right and left jump between words
-        { key = "Right"; mods = "Alt"; chars = "\\u001BF"; }
-        { key = "Left"; mods = "Alt"; chars = "\\u001BB"; }
+        {
+          key = "Right";
+          mods = "Alt";
+          chars = "\\u001BF";
+        }
+        {
+          key = "Left";
+          mods = "Alt";
+          chars = "\\u001BB";
+        }
         # ⌘ + d adds a pane to the right (splits window vertically)
-        { key = "D"; mods = "Command"; chars = "\\u0002%"; }
+        {
+          key = "D";
+          mods = "Command";
+          chars = "\\u0002%";
+        }
         # ⌘ + ⇧ + d adds a pane below (splits window horizontally)
-        { key = "D"; mods = "Command|Shift"; chars = "\\u0002\""; }
+        {
+          key = "D";
+          mods = "Command|Shift";
+          chars = "\\u0002\"";
+        }
         # ⌘ + w prompts you to close the pane; "y" to confirm
-        { key = "W"; mods = "Command"; chars = "\\u0002x"; }
+        {
+          key = "W";
+          mods = "Command";
+          chars = "\\u0002x";
+        }
         # ⌘ + arrows are for directional navigation around the panes
-        { key = "Down"; mods = "Command"; chars = "\\u0002\\u001b[B"; }
-        { key = "Up"; mods = "Command"; chars = "\\u0002\\u001b[A"; }
-        { key = "Left"; mods = "Command"; chars = "\\u0002\\u001b[D"; }
-        { key = "Right"; mods = "Command"; chars = "\\u0002\\u001b[C"; }
+        {
+          key = "Down";
+          mods = "Command";
+          chars = "\\u0002\\u001b[B";
+        }
+        {
+          key = "Up";
+          mods = "Command";
+          chars = "\\u0002\\u001b[A";
+        }
+        {
+          key = "Left";
+          mods = "Command";
+          chars = "\\u0002\\u001b[D";
+        }
+        {
+          key = "Right";
+          mods = "Command";
+          chars = "\\u0002\\u001b[C";
+        }
         # ⌘ + ⇧ + enter maximizes the pane within the alacritty window
-        { key = "Enter"; mods = "Command|Shift"; chars = "\\u0002z"; }
+        {
+          key = "Enter";
+          mods = "Command|Shift";
+          chars = "\\u0002z";
+        }
       ];
 
       window = {
