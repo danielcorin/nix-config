@@ -1,35 +1,35 @@
 # left half
-ctrl + alt + cmd - left : yabai -m window --grid 1:2:0:0:1:1
+ctrl + alt + cmd - left : /opt/homebrew/bin/yabai -m window --grid 1:2:0:0:1:1
 
 # bottom half
-ctrl + alt + cmd - down : yabai -m window --grid 2:1:0:1:1:1
+ctrl + alt + cmd - down : /opt/homebrew/bin/yabai -m window --grid 2:1:0:1:1:1
 
 # top half
-ctrl + alt + cmd - up : yabai -m window --grid 2:1:0:0:1:1
+ctrl + alt + cmd - up : /opt/homebrew/bin/yabai -m window --grid 2:1:0:0:1:1
 
 # right half
-ctrl + alt + cmd - right : yabai -m window --grid 1:2:1:0:1:1
+ctrl + alt + cmd - right : /opt/homebrew/bin/yabai -m window --grid 1:2:1:0:1:1
 
 # maximize
-ctrl + alt + cmd - m : yabai -m window --grid 1:1:0:0:1:1
+ctrl + alt + cmd - m : /opt/homebrew/bin/yabai -m window --grid 1:1:0:0:1:1
 
 # top left corner
-ctrl + shift + alt - left : yabai -m window --grid 2:2:0:0:1:1
+ctrl + shift + alt - left : /opt/homebrew/bin/yabai -m window --grid 2:2:0:0:1:1
 
 # top right corner
-ctrl + shift + alt - up : yabai -m window --grid 2:2:1:0:1:1
+ctrl + shift + alt - up : /opt/homebrew/bin/yabai -m window --grid 2:2:1:0:1:1
 
 # bottom left corner
-ctrl + shift + alt - down : yabai -m window --grid 2:2:0:1:1:1
+ctrl + shift + alt - down : /opt/homebrew/bin/yabai -m window --grid 2:2:0:1:1:1
 
 # bottom right corner
-ctrl + shift + alt - right : yabai -m window --grid 2:2:1:1:1:1
+ctrl + shift + alt - right : /opt/homebrew/bin/yabai -m window --grid 2:2:1:1:1:1
 
 # prev display
-ctrl + alt - left : yabai -m window --display prev; yabai -m display --focus prev
+ctrl + alt - left : /opt/homebrew/bin/yabai -m window --display prev; /opt/homebrew/bin/yabai -m display --focus prev
 
 # next display
-ctrl + alt - right : yabai -m window --display next; yabai -m display --focus next
+ctrl + alt - right : /opt/homebrew/bin/yabai -m window --display next; /opt/homebrew/bin/yabai -m display --focus next
 
 hyper - 2: open -a "Messages"
 hyper - r: open -a "Spotify"
