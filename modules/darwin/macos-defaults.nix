@@ -10,6 +10,11 @@
 
   programs.zsh.enable = true;
 
+  # Ensure temporary `pmset disablesleep` overrides do not survive a rebuild.
+  system.activationScripts.enableSleep.text = ''
+    /usr/bin/pmset -a disablesleep 0
+  '';
+
   system.defaults = {
     dock = {
       orientation = "left";
@@ -29,7 +34,7 @@
     SoftwareUpdate.AutomaticallyInstallMacOSUpdates = true;
 
     NSGlobalDomain = {
-      AppleShowAllExtensions = true;
+      AppleShowAllExtensions = false;
       AppleInterfaceStyle = "Dark";
       AppleFontSmoothing = 1;
       AppleShowScrollBars = "Always";
