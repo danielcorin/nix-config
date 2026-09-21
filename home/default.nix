@@ -33,6 +33,7 @@ in
   imports = [
     ./alacritty
     ./bat
+    ./ccstatusline
     ./direnv
     ./eza
     ./fzf

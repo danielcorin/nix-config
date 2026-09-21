@@ -31,6 +31,11 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.verbose = true;
+            # Activation aborts when a managed path already exists as a real
+            # file. ccstatusline rewrites its own settings.json whenever the
+            # file is missing, so it can reappear between build and switch;
+            # move such files aside instead of failing the whole activation.
+            home-manager.backupFileExtension = "hm-bak";
             home-manager.users.danielcorin = import ./home;
           }
         ];
