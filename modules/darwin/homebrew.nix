@@ -12,7 +12,6 @@
     };
 
     brews = [
-      "anomalyco/tap/opencode-v2"
       "ast-grep"
       "cloudflared"
       "colima"
