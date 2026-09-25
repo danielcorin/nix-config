@@ -15,7 +15,7 @@ Home Manager is imported as a nix-darwin module and is rebuilt with the system. 
 
 ## Validate
 
-The flake exposes `nixfmt-tree` as its formatter and the complete `dcmbp` system closure as a check:
+The flake exposes `nixfmt-tree` as its formatter. Its checks build the complete `dcmbp` system closure and run `deadnix` and `statix` lints:
 
 ```sh
 nix fmt
@@ -29,7 +29,7 @@ nix flake check
 - `flake.nix` wires pinned inputs, the `dcmbp` host, Home Manager, formatting, and checks.
 - `hosts/dcmbp` contains host identity and compatibility settings.
 - `modules/darwin` contains Homebrew, Nix daemon, and macOS system settings.
-- `home` contains the user profile and program-specific configuration.
+- `home` contains the user profile and program-specific configuration. `home/palette.nix` holds the Monokai colors shared by Ghostty and ccstatusline.
 
 ## Design notes
 
@@ -40,8 +40,8 @@ nix flake check
 - Garbage collection runs weekly and retains generations for 30 days; store optimization runs automatically. Explicit `Weekday` scheduling avoids launchd's calendar-day semantics ([Apple launchd scheduling documentation](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html), [Nix garbage-collection manual](https://nix.dev/manual/nix/stable/command-ref/nix-collect-garbage.html)).
 - Homebrew activation does not update or upgrade packages implicitly. `cleanup = "uninstall"` converges installed packages without the application-data deletion performed by `zap` ([nix-darwin Homebrew options](https://nix-darwin.github.io/nix-darwin/manual/), [Homebrew Bundle documentation](https://docs.brew.sh/Brew-Bundle-and-Brewfile)).
 - Home Manager owns most command-line tools and their configuration. Homebrew owns macOS app bundles, system integrations, and selected formulae. WezTerm's app comes from Homebrew while Home Manager owns its configuration.
-- Homebrew installs `mise` to avoid building it from source through Nix; zsh activates it directly. The official mise guide documents Homebrew as a supported alternative installation ([mise installation guide](https://mise.jdx.dev/installing-mise.html#homebrew)). `nix-direnv` remains available independently for pinned Nix project environments ([Nix direnv recipe](https://nix.dev/guides/recipes/direnv.html)).
-- The macOS application firewall and stealth mode are enabled, automatic macOS updates are allowed, and Finder shows filename extensions ([Apple firewall guide](https://support.apple.com/guide/mac-help/mh34041/mac), [Apple update guide](https://support.apple.com/guide/mac-help/mchlpx1065/mac), [Apple Finder guide](https://support.apple.com/guide/mac-help/mchlp2803/mac)). FileVault and its recovery key remain outside version control ([Apple FileVault guide](https://support.apple.com/guide/mac-help/mh11785/mac)).
+- Homebrew installs `mise` to avoid building it from source through Nix; zsh activates it directly. The official mise guide documents Homebrew as a supported alternative installation ([mise installation guide](https://mise.jdx.dev/installing-mise.html#homebrew)).
+- The macOS application firewall and stealth mode are enabled, and automatic macOS updates are allowed ([Apple firewall guide](https://support.apple.com/guide/mac-help/mh34041/mac), [Apple update guide](https://support.apple.com/guide/mac-help/mchlpx1065/mac)). FileVault and its recovery key remain outside version control ([Apple FileVault guide](https://support.apple.com/guide/mac-help/mh11785/mac)).
 
 ## Earlier inspiration
 

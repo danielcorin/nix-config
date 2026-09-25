@@ -31,19 +31,22 @@ let
     };
   });
   # Nerd Font glyphs are written as code points so this file stays readable in
-  # editors without the font. Hack Nerd Font is the terminal font everywhere
-  # here (home/ghostty, home/alacritty, home/wezterm), so they all render.
+  # editors without the font. Ghostty uses Hack Nerd Font and WezTerm falls back
+  # to its bundled Nerd Font symbols, so they all render.
   glyph = hex: builtins.fromJSON ''"\u${hex}"'';
 
-  # Monokai, matching the palette in home/ghostty.
-  pink = "hex:F92672";
-  orange = "hex:FD971F";
-  yellow = "hex:E6DB74";
-  green = "hex:A6E22E";
-  cyan = "hex:66D9EF";
-  purple = "hex:AE81FF";
-  blue = "hex:819AFF";
-  grey = "hex:75715E";
+  # Monokai, from the shared palette in home/palette.nix.
+  palette = import ../palette.nix;
+  inherit (lib.mapAttrs (_: c: "hex:${c}") palette)
+    pink
+    orange
+    yellow
+    green
+    cyan
+    purple
+    blue
+    ;
+  grey = "hex:${palette.comment}";
 
   # Widget padding is a single trailing space, so the bar carries its own
   # trailing space to render as "a | b".
@@ -61,7 +64,7 @@ let
     {
       type = "custom-symbol";
       customSymbol = glyph hex;
-      color = widget.color;
+      inherit (widget) color;
       merge = true;
       metadata.hide = "merge-target-hidden";
     }

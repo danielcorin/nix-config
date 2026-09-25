@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 
 let
   homePackages = with pkgs; [
@@ -13,7 +13,6 @@ let
     glow
     jq
     lazygit
-    neovim
     nix-init
     nixfmt
     pngquant
@@ -31,10 +30,8 @@ let
 in
 {
   imports = [
-    ./alacritty
     ./bat
     ./ccstatusline
-    ./direnv
     ./eza
     ./fzf
     ./ghostty
@@ -51,8 +48,7 @@ in
   fonts.fontconfig.enable = true;
 
   home = {
-    username = "danielcorin";
-    homeDirectory = pkgs.lib.mkForce "/Users/danielcorin";
+    inherit username;
 
     # Preserve compatibility with the Home Manager release that initialized this home.
     stateVersion = "23.11";
@@ -61,4 +57,14 @@ in
   };
 
   programs.home-manager.enable = true;
+
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    viAlias = true;
+    vimAlias = true;
+    # No plugins need the Ruby or Python providers.
+    withRuby = false;
+    withPython3 = false;
+  };
 }

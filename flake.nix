@@ -21,9 +21,13 @@
       home-manager,
       ...
     }:
+    let
+      username = "danielcorin";
+      pkgs = nixpkgs.legacyPackages.aarch64-darwin;
+    in
     {
       darwinConfigurations.dcmbp = nix-darwin.lib.darwinSystem {
-        specialArgs = { inherit self; };
+        specialArgs = { inherit self username; };
         modules = [
           ./hosts/dcmbp
           home-manager.darwinModules.home-manager
@@ -36,13 +40,28 @@
             # file is missing, so it can reappear between build and switch;
             # move such files aside instead of failing the whole activation.
             home-manager.backupFileExtension = "hm-bak";
-            home-manager.users.danielcorin = import ./home;
+            home-manager.extraSpecialArgs = { inherit username; };
+            home-manager.users.${username} = import ./home;
           }
         ];
       };
 
-      formatter.aarch64-darwin = nixpkgs.legacyPackages.aarch64-darwin.nixfmt-tree;
+      formatter.aarch64-darwin = pkgs.nixfmt-tree;
 
-      checks.aarch64-darwin.dcmbp = self.darwinConfigurations.dcmbp.system;
+      checks.aarch64-darwin = {
+        dcmbp = self.darwinConfigurations.dcmbp.system;
+
+        # Unused bindings and lambda arguments.
+        deadnix = pkgs.runCommand "deadnix" { } ''
+          ${pkgs.deadnix}/bin/deadnix --fail ${self}
+          touch $out
+        '';
+
+        # Anti-patterns and deprecated constructs.
+        statix = pkgs.runCommand "statix" { } ''
+          ${pkgs.statix}/bin/statix check --config ${self}/statix.toml ${self}
+          touch $out
+        '';
+      };
     };
 }

@@ -1,0 +1,2 @@
+# Dotted keys such as `nix.settings` and `nix.gc` are idiomatic in modules.
+disabled = ["repeated_keys"]

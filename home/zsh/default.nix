@@ -1,5 +1,3 @@
-{ ... }:
-
 {
   programs.zsh = {
     enable = true;
@@ -31,7 +29,6 @@
       export PATH="$PATH:$HOME/.local/bin"
     '';
     initContent = ''
-      export EDITOR="vim"
       function mcd () {
         mkdir -p "$1" && cd "$1";
       }
@@ -59,7 +56,7 @@
       fi
     '';
     shellAliases = {
-      dr = "darwin-rebuild switch --flake ~/.config/nix";
+      dr = "sudo darwin-rebuild switch --flake ~/.config/nix#dcmbp";
       h = "history";
       o = "open .";
 
@@ -87,7 +84,7 @@
 
       # python
       ea = ". .venv/bin/activate";
-      # Python comes from the active mise or nix-direnv project environment.
+      # Python comes from the active mise project environment.
       venv = "python -m venv .venv";
 
       # disable sleep

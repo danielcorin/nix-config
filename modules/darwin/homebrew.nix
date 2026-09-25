@@ -28,7 +28,6 @@
       "mise"
       "nowplaying-cli"
       "ollama"
-      "opencode"
       "poppler"
       "repomix"
       "sdl2-compat"
@@ -58,13 +57,11 @@
       "wezterm"
     ];
 
+    # Third-party taps used by the fully qualified formulae above.
     taps = [
-      "homebrew/bundle"
-      "homebrew/cask-fonts"
-      "homebrew/services"
-      "asmvik/formulae"
-      "FelixKratz/formulae"
+      "anomalyco/tap"
       "gromgit/fuse"
+      "jamescun/formulas"
       "koekeishiya/formulae"
     ];
   };

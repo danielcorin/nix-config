@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   programs.git = {
@@ -18,7 +18,7 @@
       push.default = "tracking";
       init.defaultBranch = "main";
       push.autoSetupRemote = true;
-      core.pager = "hunk pager";
+      core.pager = "${lib.getExe pkgs.hunk} pager";
     };
   };
 }

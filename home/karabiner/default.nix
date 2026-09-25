@@ -1,9 +1,7 @@
-{ pkgs, lib, ... }:
-let
-  isDarwin = pkgs.stdenv.isDarwin;
-in
+{ pkgs, ... }:
+
 {
-  home.file.".config/karabiner.edn" = lib.mkIf isDarwin {
+  home.file.".config/karabiner.edn" = {
     source = ./karabiner.edn;
     onChange = "${pkgs.goku}/bin/goku";
   };
